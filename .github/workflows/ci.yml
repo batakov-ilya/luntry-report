@@ -1,30 +1,49 @@
+# Название workflow (может быть любым)
 name: CI Pipeline
 
+# Триггеры: указываем, когда workflow должен запускаться
 on:
+  # Запуск при push в ветку main
   push:
     branches:
       - main
+  # Запуск при создании pull request в ветку main
   pull_request:
     branches:
       - main
 
+# Задачи (jobs), которые будут выполнены
 jobs:
+  # Задача с именем "test" (может быть любым)
   test:
+    # Указываем операционную систему для запуска (ubuntu-latest, windows-latest, macos-latest)
     runs-on: ubuntu-latest
 
+    # Шаги (steps), которые будут выполнены в рамках задачи
     steps:
+      # Шаг 1: Клонирование репозитория
       - name: Checkout code
+        # Используем готовое действие для клонирования репозитория
         uses: actions/checkout@v2
 
+      # Шаг 2: Установка Python
       - name: Set up Python
+        # Используем готовое действие для установки Python
         uses: actions/setup-python@v2
         with:
+          # Указываем версию Python (можно изменить на нужную)
           python-version: '3.9'
 
+      # Шаг 3: Установка зависимостей
       - name: Install dependencies
+        # Выполняем команды в терминале
         run: |
+          # Обновляем pip до последней версии
           python -m pip install --upgrade pip
+          # Устанавливаем зависимости из файла requirements.txt
           pip install -r requirements.txt
 
+      # Шаг 4: Запуск тестов
       - name: Run tests
+        # Запускаем тесты с помощью pytest
         run: pytest
