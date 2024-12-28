@@ -1,0 +1,45 @@
+/* Градиентный фон */
+body {
+    background: linear-gradient(to bottom, #87CEEB, #90EE90);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Контейнер для кнопок и сообщений */
+.container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для кнопок */
+.button {
+    background-color: #11b4f5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #6ca6c7;
+    transform: scale(1.05);
+}
+
+/* Стили для сообщений */
+.message {
+    color: #333;
+    font-size: 14px;
+    margin-top: 10px;
+}

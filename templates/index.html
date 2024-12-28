@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Преобразование JSON в CSV</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Загрузите JSON файл для преобразования в CSV</h1>
+        <form action="/convert" method="post" enctype="multipart/form-data" onsubmit="return handleSubmit()">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <input type="file" id="fileInput" name="file" accept=".json" required style="display: none;">
+                <label for="fileInput" class="button">Загрузить JSON</label>
+                <div id="fileMessage" class="message"></div>
+                <button type="submit" class="button">Преобразовать в CSV</button>
+                <div id="successMessage" class="message"></div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Обработка выбора файла
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const fileMessage = document.getElementById('fileMessage');
+            if (file) {
+                fileMessage.textContent = `Файл "${file.name}" успешно загружен.`;
+            } else {
+                fileMessage.textContent = '';
+            }
+        });
+
+        // Обработка отправки формы
+        function handleSubmit() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('Пожалуйста, выберите файл.');
+                return false;
+            }
+            return true;
+        }
+
+        // Отображение сообщения об успешном выполнении
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            document.getElementById('successMessage').textContent = 'CSV файл успешно создан и скачан.';
+        }
+    </script>
+</body>
+</html>
